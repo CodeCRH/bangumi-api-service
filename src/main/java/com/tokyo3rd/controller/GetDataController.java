@@ -111,10 +111,21 @@ public class GetDataController {
         while (keys.hasNext()) {
             JSONObject jsonObject = JSONObject.parseObject(bangumiData.get(keys.next()));
             Integer nowEps = 0;
+            Integer allEps = 1;
             try {
                 nowEps = jsonObject.getJSONObject("progressData").getJSONArray("eps").size();
             } catch (Exception e) {
                 log.info("get eps error,set defult 0");
+            }
+            try {
+                allEps = Integer.parseInt(jsonObject.getJSONObject("subject").getString("eps"));
+            } catch (Exception e) {
+                if (nowEps == 0) {
+                    allEps = 1;
+                } else {
+                    allEps = nowEps;
+                }
+                log.info("get allEps error,set defult 0");
             }
 
             result.append("  <div class = 'bangumItem'>\n" +
@@ -126,7 +137,7 @@ public class GetDataController {
                     "            <div class='jinduText'>进度:" +
                     nowEps + " / " + jsonObject.getJSONObject("subject").getString("eps")
                     + "</div>\n" +
-                    "            <div class='jinduFG' style='width:\" " + (nowEps / Integer.parseInt(jsonObject.getJSONObject("subject").getString("eps")) * 195) + " \"px;'>\n" +
+                    "            <div class='jinduFG' style='width:\" " + (nowEps / allEps * 195) + " \"px;'>\n" +
                     "            </div>\n" +
                     "            </div>\n" +
                     "            </p>\n" +
