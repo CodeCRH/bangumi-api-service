@@ -1,0 +1,21 @@
+logging:
+  config: 'classpath:log/logback.xml'
+
+# Tomcat
+server:
+  port: 9999                         #your tomcat port
+  connection-timeout: 5000ms         #your tomcat connection timeout
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30
+
+system:
+  appname:                   #your bangumi app name
+  username:                  #your bangumi account
+  password:                  #your bangumi password
+  timeout: 5000                       #request timeout( 5000 ms = 5s)
+  redishost: 127.0.0.1                #your redis host
+  redisport: 6379                     #your redis port
+  redispassword:                      #your redis password
+  rediskey: bangumi                   #your redis keyname
