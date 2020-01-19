@@ -40,12 +40,12 @@ public class GetDataController {
     private String rediskey;
 
     @GetMapping("/getBangumiData")
-    public JSONArray getBangumiData(){
+    public JSONArray getBangumiData() {
         RedisCacheUtil redisCacheUtil = RedisCacheUtil.getRedisCacheUtil(redishost, redisPort, redispassword);
-        Map<String,String> bangumiData = redisCacheUtil.hgetAll(rediskey);
+        Map<String, String> bangumiData = redisCacheUtil.hgetAll(rediskey);
         Iterator<String> keys = bangumiData.keySet().iterator();
         JSONArray jsonArray = new JSONArray();
-        while (keys.hasNext()){
+        while (keys.hasNext()) {
             JSONObject jsonObject = JSONObject.parseObject(bangumiData.get(keys.next()));
             jsonArray.add(jsonObject);
         }
@@ -53,15 +53,11 @@ public class GetDataController {
     }
 
     @GetMapping("/index")
-    public String getBangumiHtml(HttpServletRequest request){
+    public String getBangumiHtml(HttpServletRequest request) {
         RedisCacheUtil redisCacheUtil = RedisCacheUtil.getRedisCacheUtil(redishost, redisPort, redispassword);
-        Map<String,String> bangumiData = redisCacheUtil.hgetAll(rediskey);
+        Map<String, String> bangumiData = redisCacheUtil.hgetAll(rediskey);
         Iterator<String> keys = bangumiData.keySet().iterator();
-//        JSONArray jsonArray = new JSONArray();
-//        while (keys.hasNext()){
-//            JSONObject jsonObject = JSONObject.parseObject(bangumiData.get(keys.next()));
-//            jsonArray.add(jsonObject);
-//        }
+
         StringBuilder result = new StringBuilder();
         result.append("          <style>\n" +
                 "          div.bangumItem{\n" +
@@ -112,26 +108,25 @@ public class GetDataController {
                 "            font-size:15px;\n" +
                 "          }\n" +
                 "          </style>");
-        while (keys.hasNext()){
+        while (keys.hasNext()) {
             JSONObject jsonObject = JSONObject.parseObject(bangumiData.get(keys.next()));
             Integer nowEps = 0;
-            try{
-                nowEps =  jsonObject.getJSONObject("progressData").getJSONArray("eps").size();
-            }
-            catch (Exception e){
+            try {
+                nowEps = jsonObject.getJSONObject("progressData").getJSONArray("eps").size();
+            } catch (Exception e) {
                 log.info("get eps error,set defult 0");
             }
 
             result.append("  <div class = 'bangumItem'>\n" +
-                    "          <a href=' "+ jsonObject.getJSONObject("subject").getString("url") +"' target='_blank'>\n" +
-                    "            <img src='"+ jsonObject.getJSONObject("subject").getJSONObject("images").getString("grid") +"' />\n" +
-                    "            <p> "+ jsonObject.getJSONObject("subject").getString("name") +"<br>\n" +
-                    "           "+ jsonObject.getJSONObject("subject").getString("name_cn") +"<br>\n" +
+                    "          <a href=' " + jsonObject.getJSONObject("subject").getString("url") + "' target='_blank'>\n" +
+                    "            <img src='" + jsonObject.getJSONObject("subject").getJSONObject("images").getString("grid") + "' />\n" +
+                    "            <p> " + jsonObject.getJSONObject("subject").getString("name") + "<br>\n" +
+                    "           " + jsonObject.getJSONObject("subject").getString("name_cn") + "<br>\n" +
                     "            <div class='jinduBG'>\n" +
                     "            <div class='jinduText'>进度:" +
-                    nowEps +" / "+ jsonObject.getJSONObject("subject").getString("eps")
+                    nowEps + " / " + jsonObject.getJSONObject("subject").getString("eps")
                     + "</div>\n" +
-                    "            <div class='jinduFG' style='width:\" "+( nowEps /  Integer.parseInt(jsonObject.getJSONObject("subject").getString("eps")) * 195 )+" \"px;'>\n" +
+                    "            <div class='jinduFG' style='width:\" " + (nowEps / Integer.parseInt(jsonObject.getJSONObject("subject").getString("eps")) * 195) + " \"px;'>\n" +
                     "            </div>\n" +
                     "            </div>\n" +
                     "            </p>\n" +

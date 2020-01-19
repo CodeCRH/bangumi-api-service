@@ -86,6 +86,15 @@ curl http://your host:your port/api/getBangumiData
 }
 ```
 
+#### get Html
+```
+curl http://your host:your port/api/index
+```
+#### result
+```
+<html> ......(html content) </html>
+```
+
 #### 使用Api (Use API ) 
 ##### 登陆(post)
 ```
