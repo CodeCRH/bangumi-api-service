@@ -135,9 +135,9 @@ public class GetDataController {
                     "           " + jsonObject.getJSONObject("subject").getString("name_cn") + "<br>\n" +
                     "            <div class='jinduBG'>\n" +
                     "            <div class='jinduText'>进度:" +
-                    nowEps + " / " + jsonObject.getJSONObject("subject").getString("eps")
+                    nowEps + " / " + allEps
                     + "</div>\n" +
-                    "            <div class='jinduFG' style='width:\" " + (nowEps / allEps * 195) + " \"px;'>\n" +
+                    "            <div class='jinduFG' style='width:" + (nowEps / allEps * 195) + "px;'>\n" +
                     "            </div>\n" +
                     "            </div>\n" +
                     "            </p>\n" +
