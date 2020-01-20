@@ -4,6 +4,8 @@ Read me
 
 your gangumi cache,timed refresh
 
+示例页面 demo :  [LINK](https://www.tokyo3rd.com/s/bangumi)
+
 
 
 #### 依赖组件 (dependent)
