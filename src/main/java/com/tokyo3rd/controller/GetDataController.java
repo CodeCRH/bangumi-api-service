@@ -137,7 +137,7 @@ public class GetDataController {
                     "            <div class='jinduText'>进度:" +
                     nowEps + " / " + allEps
                     + "</div>\n" +
-                    "            <div class='jinduFG' style='width:" + (nowEps / allEps * 195) + "px;'>\n" +
+                    "            <div class='jinduFG' style='width:" + ( Float.valueOf(Float.valueOf(nowEps) / Float.valueOf(allEps)) ) * 195.0 + "px;'>\n" +
                     "            </div>\n" +
                     "            </div>\n" +
                     "            </p>\n" +
